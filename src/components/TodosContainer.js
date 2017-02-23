@@ -12,6 +12,23 @@ class TodosContainer extends Component {
       </div>
     )
   }
+  deleteTodo(todo){
+    TodoModel.delete(todo).then( (res) => {
+      let todos = res.data
+      this.setState({todos})
+    })
+  }
+  render(){
+    return (
+      <div className="todosComponent">
+        <Todos
+          todos={this.state.todos}
+          onDeleteTodo={this.deleteTodo.bind(this)} />
+        <CreateTodoForm
+          createTodo={this.createTodo.bind(this)} />
+      </div>
+    )
+  }
 }
 
 export default TodosContainer
